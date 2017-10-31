@@ -8,7 +8,7 @@
     @foreach (string lookupName in ViewBag.LookupList)
     {
         <tr>
-            <td><a href="/Lookup/@lookupName">@lookupName</a></td>
+            <td><a href="/Lookup/@lookupName.Replace(" ", "")">@lookupName</a></td>
         </tr>
     }
 
