@@ -20,7 +20,7 @@ namespace ck_project.Controllers
                 "Project Type",
                 "Project Status",
                 "Lead Source",
-                "Delivery Type"
+                "Delivery Status"
 
             };
             return View();
@@ -54,7 +54,7 @@ namespace ck_project.Controllers
                 db.SaveChanges();
             }
 
-            return View(target);
+            return RedirectToAction("ProjectStatus");
         }
 
         //Add Project Status Look Up Page
@@ -106,9 +106,10 @@ namespace ck_project.Controllers
             {
                 db.project_class.Add(target);
                 db.SaveChanges();
+                
             }
 
-            return View(target);
+            return RedirectToAction("ProjectClass");
         }
         //Add Project Class Look Up Page
 
@@ -162,7 +163,7 @@ namespace ck_project.Controllers
                 db.SaveChanges();
             }
 
-            return View(target);
+            return RedirectToAction("LeadSource");
         }
         //Add lead_source Look Up Page
 
@@ -215,7 +216,7 @@ namespace ck_project.Controllers
                 db.SaveChanges();
             }
 
-            return View(target);
+            return RedirectToAction("DeliveryStatus");
         }
         //Add DeliveryStatus Look Up Page
 
@@ -268,7 +269,7 @@ namespace ck_project.Controllers
                 db.SaveChanges();
             }
 
-            return View(target);
+            return RedirectToAction("ProjectType");
         }
         //Add ProjectType Look Up Page
 
