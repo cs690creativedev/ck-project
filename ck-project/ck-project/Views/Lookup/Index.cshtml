@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lookup List</h2>
+<table>
+    @foreach (string lookupName in ViewBag.LookupList)
+    {
+        <tr>
+            <td>@lookupName</td>
+        </tr>
+    }
+
+
+
+</table>
