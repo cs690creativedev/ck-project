@@ -368,6 +368,10 @@
     <Content Include="Views\Lookup\ProjectClassAdd.cshtml" />
     <Content Include="Views\Lookup\LeadSource.cshtml" />
     <Content Include="Views\Lookup\LeadSourceAdd.cshtml" />
+    <Content Include="Views\Lookup\DeliveryStatus.cshtml" />
+    <Content Include="Views\Lookup\DeliveryStatusAdd.cshtml" />
+    <Content Include="Views\Lookup\ProjectType.cshtml" />
+    <Content Include="Views\Lookup\ProjectTypeAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

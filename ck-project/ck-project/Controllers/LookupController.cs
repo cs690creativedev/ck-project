@@ -185,5 +185,111 @@ namespace ck_project.Controllers
 
             return RedirectToAction("LeadSource");
         }
+
+
+        // DeliveryStatus list view
+        public ActionResult DeliveryStatus()
+        {
+            List<delivery_status> delivery_status_list = db.delivery_status.ToList();
+            ViewBag.delivery_status_list = delivery_status_list;
+            return View();
+
+
+        }
+
+        //Post Values into DeliveryStatus Look Up
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult DeliveryStatusAdd(FormCollection form)
+        {
+
+            delivery_status target = new delivery_status();
+            //get property
+            TryUpdateModel(target, new string[] { "delivery_status_name" }, form.ToValueProvider());
+            //validate
+            if (string.IsNullOrEmpty(target.delivery_status_name))
+                ModelState.AddModelError("delivery_status_name", "Project class is required");
+
+            if (ModelState.IsValid)
+            {
+                db.delivery_status.Add(target);
+                db.SaveChanges();
+            }
+
+            return View(target);
+        }
+        //Add DeliveryStatus Look Up Page
+
+        public ActionResult DeliveryStatusAdd()
+        {
+
+            return View();
+
+
+        }
+
+        // Delete DeliveryStatus Look Up Page
+        public ActionResult DeliveryStatusDelete(int id)
+        {
+            //find target by uid
+            delivery_status target = db.delivery_status.First(s => s.delivery_status_number == id);
+            //delete
+            db.delivery_status.Remove(target);
+            db.SaveChanges();
+
+            return RedirectToAction("DeliveryStatus");
+        }
+
+
+        // Project Type list view
+        public ActionResult ProjectType()
+        {
+            List<delivery_status> delivery_status_list = db.delivery_status.ToList();
+            ViewBag.delivery_status_list = delivery_status_list;
+            return View();
+
+
+        }
+
+        //Post Values into Project Type Look Up
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult ProjectTypeAdd(FormCollection form)
+        {
+
+            project_type target = new project_type();
+            //get property
+            TryUpdateModel(target, new string[] { "project_type_name" }, form.ToValueProvider());
+            //validate
+            if (string.IsNullOrEmpty(target.project_type_name))
+                ModelState.AddModelError("project_type_name", "Project class is required");
+
+            if (ModelState.IsValid)
+            {
+                db.project_type.Add(target);
+                db.SaveChanges();
+            }
+
+            return View(target);
+        }
+        //Add ProjectType Look Up Page
+
+        public ActionResult ProjectTypeAdd()
+        {
+
+            return View();
+
+
+        }
+
+        // Delete Project Type Look Up Page
+        public ActionResult ProjectTypeDelete(int id)
+        {
+            //find target by uid
+            project_type target = db.project_type.First(s => s.project_type_number == id);
+            //delete
+            db.project_type.Remove(target);
+            db.SaveChanges();
+
+            return RedirectToAction("ProjectType");
+        }
     }
 }
