@@ -1,0 +1,57 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+        function del(id) {
+            if (confirm("sure?")) {
+                window.location = " /sample/Delete/" + id;
+            }
+        }
+    </script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @if (ViewBag.Customerslist != null)
+        {
+
+            <div class="btn-toolbar">
+                <button class="btn btn-primary">New Customer</button>
+                <button class="btn">Delete</button>
+                <button class="btn">Update</button>
+            </div>
+            <h2>Liat of Customers</h2>
+
+
+
+
+            foreach (customer a in ViewBag.Customerslist)
+            {
+
+                <div>@a.customer_number</div>
+                <label>First Name</label>
+                <div>@a.customer_firstname</div>
+                <div>@a.customer_middlename</div>
+                <div>@a.customer_lastname</div>
+                <div>@a.email</div>
+                <div>@a.phone_number</div>
+                <div>@a.second_phone_number</div>
+                <div>@a.address.address_type</div>
+                <div>@a.customer_firstname</div>
+                <div></div>
+                <div></div>
+
+
+            }
+        }
+    </div>
+</body>
+</html>

@@ -220,6 +220,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
+    <Compile Include="Controllers\TurkiCustomersController.cs" />
     <Compile Include="customer.cs">
       <DependentUpon>cksys.tt</DependentUpon>
     </Compile>
@@ -363,6 +364,8 @@
     <Content Include="Views\Sample\Add.cshtml" />
     <Content Include="Views\GroupTest\Index.cshtml" />
     <Content Include="Views\GroupTest\Psge2.cshtml" />
+    <Content Include="Views\TurkiCustomers\Customers.cshtml" />
+    <Content Include="Views\TurkiCustomers\CustomersTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

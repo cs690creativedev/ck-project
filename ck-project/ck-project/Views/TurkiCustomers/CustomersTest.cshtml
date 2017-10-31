@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ck_project.customer>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label>First Name</label>
+        </th>
+        <th>
+         Middle Name
+        </th>
+        <th>
+          Last Name
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th>
+           Second Phone Number
+        </th>
+        <th>
+         Email Address
+        </th>
+        <th>
+            Address Type
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (customer item in ViewBag.Customerslist) { 
+    <tr>
+        <td>
+          @item.customer_number
+        </td>
+        <td>
+            @item.customer_middlename
+        </td>
+        <td>
+            @item.customer_lastname
+        </td>
+        <td>
+            @item.phone_number
+        </td>
+        <td>
+            @item.second_phone_number
+        </td>
+        <td>
+            @item.email
+        </td>
+        <td>
+            @item.address.address_type
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.customer_number }) |
+            @Html.ActionLink("Details", "Details", new { id=item.customer_number }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.customer_number })
+        </td>
+    </tr>
+}
+
+</table>
