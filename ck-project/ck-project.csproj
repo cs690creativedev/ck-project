@@ -218,6 +218,8 @@
     <Compile Include="Controllers\HomeController.cs" />
 <<<<<<< HEAD
 =======
+    <Compile Include="Controllers\LookupController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
 >>>>>>> Balarka
     <Compile Include="customer.cs">
@@ -400,6 +402,21 @@
     <Content Include="Views\Home\LeadTab.cshtml" />
     <Content Include="Views\Home\LeadPage.cshtml" />
 =======
+    <Content Include="Views\Sample\Index.cshtml" />
+    <Content Include="Views\Sample\Mofifyemployee.cshtml" />
+    <Content Include="Views\Sample\Viewemployee.cshtml" />
+    <Content Include="Views\Sample\Add.cshtml" />
+    <Content Include="Views\Lookup\Index.cshtml" />
+    <Content Include="Views\Lookup\ProjectStatus.cshtml" />
+    <Content Include="Views\Lookup\ProjectStatusAdd.cshtml" />
+    <Content Include="Views\Lookup\ProjectClass.cshtml" />
+    <Content Include="Views\Lookup\ProjectClassAdd.cshtml" />
+    <Content Include="Views\Lookup\LeadSource.cshtml" />
+    <Content Include="Views\Lookup\LeadSourceAdd.cshtml" />
+    <Content Include="Views\Lookup\DeliveryStatus.cshtml" />
+    <Content Include="Views\Lookup\DeliveryStatusAdd.cshtml" />
+    <Content Include="Views\Lookup\ProjectType.cshtml" />
+    <Content Include="Views\Lookup\ProjectTypeAdd.cshtml" />
 >>>>>>> Balarka
   </ItemGroup>
   <ItemGroup>
