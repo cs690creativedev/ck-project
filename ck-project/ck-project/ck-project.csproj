@@ -216,6 +216,7 @@
       <DependentUpon>cksys.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
@@ -360,6 +361,8 @@
     <Content Include="Views\Sample\Mofifyemployee.cshtml" />
     <Content Include="Views\Sample\Viewemployee.cshtml" />
     <Content Include="Views\Sample\Add.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Modifyemployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
