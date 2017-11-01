@@ -1,4 +1,8 @@
+<<<<<<< HEAD:ck-project/cksys.Designer.cs
 ﻿// T4 code generation is enabled for model 'C:\Users\yang57\source\repos\ck-project\ck-project\ck-project\cksys.edmx'. 
+=======
+﻿// T4 code generation is enabled for model 'C:\Users\yang57\Source\newrepo\ck-project\ck-project\ck-project\cksys.edmx'. 
+>>>>>>> week1:ck-project/ck-project/cksys.Designer.cs
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

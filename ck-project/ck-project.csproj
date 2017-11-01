@@ -215,13 +215,19 @@
       <DependentUpon>cksys.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GroupTestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+<<<<<<< HEAD:ck-project/ck-project.csproj
 <<<<<<< HEAD
 =======
     <Compile Include="Controllers\LookupController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SampleController.cs" />
 >>>>>>> Balarka
+=======
+    <Compile Include="Controllers\LookupController.cs" />
+    <Compile Include="Controllers\TurkiCustomersController.cs" />
+>>>>>>> week1:ck-project/ck-project/ck-project.csproj
     <Compile Include="customer.cs">
       <DependentUpon>cksys.tt</DependentUpon>
     </Compile>
@@ -398,6 +404,7 @@
     <Content Include="Views\Shared\_LeadTabs.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+<<<<<<< HEAD:ck-project/ck-project.csproj
 <<<<<<< HEAD
     <Content Include="Views\Home\LeadTab.cshtml" />
     <Content Include="Views\Home\LeadPage.cshtml" />
@@ -421,6 +428,27 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+=======
+    <Content Include="Views\Home\LeadTab.cshtml" />
+    <Content Include="Views\Home\LeadPage.cshtml" />
+    <Content Include="Views\GroupTest\Index.cshtml" />
+    <Content Include="Views\GroupTest\Psge2.cshtml" />
+    <Content Include="Views\Lookup\DeliveryStatus.cshtml" />
+    <Content Include="Views\Lookup\DeliveryStatusAdd.cshtml" />
+    <Content Include="Views\Lookup\Index.cshtml" />
+    <Content Include="Views\Lookup\LeadSource.cshtml" />
+    <Content Include="Views\Lookup\LeadSourceAdd.cshtml" />
+    <Content Include="Views\Lookup\ProjectClass.cshtml" />
+    <Content Include="Views\Lookup\ProjectClassAdd.cshtml" />
+    <Content Include="Views\Lookup\ProjectStatus.cshtml" />
+    <Content Include="Views\Lookup\ProjectStatusAdd.cshtml" />
+    <Content Include="Views\Lookup\ProjectType.cshtml" />
+    <Content Include="Views\Lookup\ProjectTypeAdd.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\TurkiCustomers\" />
+>>>>>>> week1:ck-project/ck-project/ck-project.csproj
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
