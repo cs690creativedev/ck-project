@@ -216,6 +216,10 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Controllers\SampleController.cs" />
+>>>>>>> Balarka
     <Compile Include="customer.cs">
       <DependentUpon>cksys.tt</DependentUpon>
     </Compile>
@@ -392,8 +396,11 @@
     <Content Include="Views\Shared\_LeadTabs.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Home\LeadTab.cshtml" />
     <Content Include="Views\Home\LeadPage.cshtml" />
+=======
+>>>>>>> Balarka
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
