@@ -50,20 +50,17 @@ namespace ck_project.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult SearchTax(FormCollection fo)
+        [ActionName("SearchTax")]
+        public ActionResult ViewTax(FormCollection fo)
         {
             string strName = fo["zipcode"].ToString();
             List<tax> TaxList = db.taxes.Where(d => d.zipcode == strName).ToList();
             ViewBag.TaxList = TaxList;
-            tax target = TaxList[0];
-            return View(target);
+            
+            return View("ViewTax");
 
         }
 
-        public ActionResult ViewTax()
-        {
-
-            return View();
-        }
+       
     }
 }

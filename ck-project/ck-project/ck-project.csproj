@@ -360,6 +360,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Taxes\ViewTax.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -422,7 +423,6 @@
     <Content Include="Views\Emp\ListEmp.cshtml" />
     <Content Include="Views\Taxes\AddTax.cshtml" />
     <Content Include="Views\Taxes\SearchTax.cshtml" />
-    <Content Include="Views\Taxes\ViewTax.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
