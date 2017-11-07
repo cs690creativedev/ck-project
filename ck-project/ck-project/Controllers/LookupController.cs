@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace ck_project.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class LookupController : Controller
     {
         // GET: Lookup
@@ -33,7 +34,7 @@ namespace ck_project.Controllers
             ViewBag.project_status_list = project_status_list;
             return View();
 
-          
+
         }
 
         //Post Values into Project Status Look Up
@@ -61,7 +62,7 @@ namespace ck_project.Controllers
 
         public ActionResult ProjectStatusAdd()
         {
-            
+
             return View();
 
 
@@ -106,7 +107,7 @@ namespace ck_project.Controllers
             {
                 db.project_class.Add(target);
                 db.SaveChanges();
-                
+
             }
 
             return RedirectToAction("ProjectClass");
