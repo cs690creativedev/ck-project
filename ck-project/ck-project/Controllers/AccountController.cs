@@ -75,8 +75,9 @@ namespace ck_project.Controllers
                 // Verification.    
                 if (ModelState.IsValid)
                 {
+                    var password = EncryptionHelper.Encrypt(model.Password);
                     // Initialization.    
-                    var loginInfo = this.databaseManager.employees.Where(a=> a.emp_username.Equals(model.Email) && a.emp_password.Equals(model.Password)).ToList();
+                    var loginInfo = this.databaseManager.employees.Where(a=> a.emp_username.Equals(model.Email) && a.emp_password.Equals(password)).ToList();
                     // Verification.    
                     if (loginInfo != null && loginInfo.Count() > 0)
                     {
@@ -85,7 +86,13 @@ namespace ck_project.Controllers
                         // Login In.    
                         this.SignInUser(logindetails.emp_username, false,logindetails.emp_number.ToString(),logindetails.users_types.user_type_name);
                         // Info.    
-                        return this.RedirectToLocal(returnUrl);
+                        if (logindetails.users_types.user_type_name == "Administrator")
+                        {
+                            return RedirectToAction("AdminMainPage", "Admin");
+                        } else
+                        {
+                            return RedirectToAction("MainPage", "Home");
+                        }
                     }
                     else
                     {
@@ -186,5 +193,10 @@ namespace ck_project.Controllers
         }
         #endregion
         #endregion
+
+        public ActionResult ForgotPassword()
+        {
+            return View("Please contact your administrator to reset your password.");
+        }
     }
 }

@@ -1,78 +1,102 @@
 ﻿
 @{
     ViewBag.Title = "LeadPage";
-}
 
-<h2>LeadPage</h2>
+    if (HttpContext.Current.User.IsInRole("Administrator")) {
+        @Html.Partial("_AdminMenu")
+    } else 
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
 
 <div class="container">
-    <div class="row">
-        <div class="tabbable">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#leadTab" class="tab" data-info="leadInfo" data-toggle="tab">Lead</a></li>
-                <li><a href="#customerTab" class="tab" data-info="customerInfo" data-toggle="tab">Customer</a></li>
-                <li><a href="#productsTab" class="tab" data-info="productsInfo" data-toggle="tab">Products and Materials</a></li>
-                <li><a href="#installTab" class="tab" data-info="installInfo" data-toggle="tab">Installation</a></li>
-                <li><a href="#summaryTab" class="tab" data-info="summaryInfo" data-toggle="tab">Summary</a></li>
-                <li><a href="#printTab" class="tab" data-info="printInfo" data-toggle="tab">Print</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane" id="leadTab">
-                    @Html.Action("LeadTab", "Home")
-                </div>
-                <div class="tab-pane" id="customerTab">
-                    Customer Page
-                </div>
-                <div class="tab-pane" id="productsTab">
-                    Products Page
-                </div>
-                <div class="tab-pane" id="installTab">
-                    Installation Page
-                </div>
-                <div class="tab-pane" id="summaryTab">
-                    Summary Page
-                </div>
-                <div class="tab-pane" id="printTab">
-                    Print Page
-                </div>
-            </div>
-        </div>
+    <h2>Lead Management</h2>
+    <ul id="myTab" class="nav nav-tabs">
 
-    </div>
-</div>
-
-
-@section scripts {
-    @*   $(function () {
-        var hash = window.location.hash;
-        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
-
-        $('.nav-tabs a').click(function (e) {
-            $(this).tab('show');
-            var scrollmem = $('body').scrollTop();
-            window.location.hash = this.hash;
-            $('html,body').scrollTop(scrollmem);
-        });
-*@
-    $('.tab').on('click', function () {
-            var info = $(this).data('info');
-            switch (info) {
-                case 'leadInfo': $('#leadTab p').load('/Views/Home/LeadTab'); //Controller method which returns partial view
-                    break;
-                case 'customerInfo': $('#customerTab p').load('/Views/Home/LeadTab'); //Controller method which returns partial view
-                    break;
-                case 'productsInfo': $('#productsTab p').load('/Views/Home/LeadTab'); //Controller method which returns partial view
-                    break;
-                case 'installInfo': $('#installTab p').load('/Views/Home/LeadTab'); //Controller method which returns partial view
-                    break;
-                case 'summaryInfo': $('#summaryTab p').load('/Views/Home/LeadTab'); //Controller method which returns partial view
-                    break;
-                case 'printInfo': $('#printTab p').load('/Views/Home/LeadTab'); //Controller method which returns partial view
-                    break;
-                //Add cases if you want
-                default;
+        <li class="active"><a href="#leadTab" class="tab" data-toggle="tab" aria-expanded="true">Lead</a></li>
+        <li><a href="#customerTab" class="tab" data-toggle="tab" aria-expanded="true">Customer</a></li>
+        <li><a href="#productsTab" class="tab" data-toggle="tab" aria-expanded="true">Products and Materials</a></li>
+        <li><a href="#installTab" class="tab" data-toggle="tab" aria-expanded="true">Installation</a></li>
+        <li><a href="#summaryTab" class="tab" data-toggle="tab" aria-expanded="true">Summary</a></li>
+        <li><a href="#printTab" class="tab" data-toggle="tab" aria-expanded="true">Print</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane active in" id="leadTab">
+            @{
+                if (ViewBag.leadNumber != 0)
+                {
+                    if (ViewBag.editable)
+                    {
+                        @Html.Action("Edit", "Lead", new { id = ViewBag.leadNumber })
+                    }
+                    else
+                    {
+                        @Html.Action("Details", "Lead", new { id = ViewBag.leadNumber })
+                    }
+                }
+                else
+                {
+                    @Html.Action("Add", "Lead", new { cid = ViewBag.customerNumber })
+                }
             }
-    });
+        </div>
+        <div class="tab-pane" id="customerTab">
+            @{
+                if (ViewBag.customerNumber != 0)
+                {
+                    @Html.Action("Edit", "Customers", new { id = ViewBag.customerNumber })
+
+                }
+                else
+                {
+                    @Html.Action("AddCustomer", "Customers")
+                }
+            }
+        </div>
+        <div class="tab-pane" id="productsTab">
+            @*@Html.Action("View", "Product", new { id = ViewBag.leadNumber })*@
+        </div>
+        <div class="tab-pane" id="installTab">
+           @Html.Action("Lis","Install")
+        </div> 
+        <div class="tab-pane" id="summaryTab">
+            @Html.Action("SummaryTab", new { id = ViewBag.leadNumber })
+        </div>
+        <div class="tab-pane" id="printTab">
+            @Html.Action("PrintTab", new { id = ViewBag.leadNumber })
+        </div>
+    </div>
+</div> 
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () {
+            var hash = window.location.hash;
+            hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+            $('.nav-tabs a').click(function (e) {
+                $(this).tab('show');
+                var scrollmem = $('body').scrollTop() || $('html').scrollTop();
+                window.location.hash = this.hash;
+                $('html,body').scrollTop(scrollmem);
+            });
+
+            // Change tab on hashchange
+            window.addEventListener('hashchange', function () {
+                var changedHash = window.location.hash;
+                changedHash && $('ul.nav a[href="' + changedHash + '"]').tab('show');
+            }, false);
+        });
+
+        $(document).ready(function () {
+            $(".navbar-nav li").removeClass("active");//this will remove the active class from  
+            //previously active menu item 
+            $('#lead').addClass('active');
+        });
+    </script>
 }
+

@@ -1,0 +1,86 @@
+﻿@model ck_project.address
+
+@{
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h3>Edit Address</h3>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.address_number)
+
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class='control-label'>Address</label>
+                    @Html.EditorFor(model => model.address1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+                <div class='col-xs-4 '>
+                    <div class="form-group">
+                        <label class='control-label'>City</label>
+                        @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class='col-xs-4 '>
+                    <div class="form-group">
+                        <label class="control-label" for="name"> State</label>
+                        @Html.DropDownList("state", (IEnumerable<SelectListItem>)ViewBag.Sstate, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class='col-xs-4 '>
+                    <div class="form-group">
+                        <label class="control-label" for="name">County</label>
+                        @Html.EditorFor(model => model.county, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.county, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class='col-xs-4 '>
+                    <div class="form-group">
+                        <label class='control-label'>Zip code</label>
+                        @Html.EditorFor(model => model.zipcode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.zipcode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-0 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            }
+            <div>
+                @Html.ActionLink("Back to List", "ListCustomers", "Customers")
+            </div>
+        </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.m != null)
+    {
+        <script type="text/javascript">
+ $(document).ready(function () {
+toastr.success('@ViewBag.m');
+});
+        </script>
+    }
+}
