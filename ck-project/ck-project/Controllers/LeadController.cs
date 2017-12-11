@@ -31,15 +31,24 @@ namespace ck_project.Controllers
             int type = string.IsNullOrEmpty(Type) ? 3 : int.Parse(Type);
             DateTime start = string.IsNullOrEmpty(Start) ? DateTime.MinValue : DateTime.Parse(Start);
             DateTime end2 = string.IsNullOrEmpty(end) ? DateTime.MaxValue : DateTime.Parse(end);
+            TimeSpan ts = new TimeSpan(23, 59, 59);
+            end2 = end2.Date + ts;
 
+            int statusNbr = 0;
+            if (!string.IsNullOrEmpty(Type))
+            {
+                statusNbr = Int32.Parse(Type);
+            }
 
-        //public ActionResult ListLead(string search = null, String msg = null, int type = 3)
-        //{
+            //public ActionResult ListLead(string search = null, String msg = null, int type = 3)
+            //{
 
             try
             {
                 ViewBag.m = msg;
-                var ClassInfo = new List<SelectListItem>();
+                var ClassInfo = new List<SelectListItem> {
+                    new SelectListItem() { Text = "All Statuses", Selected = true, Value = "" }
+                };
                 ClassInfo.AddRange(db.project_status.Where(CCVV => CCVV.project_status_name != "closed").Select(b => new SelectListItem
                 
                 {
@@ -48,8 +57,12 @@ namespace ck_project.Controllers
                     Value = b.project_status_number.ToString()
                 }));
                 ViewBag.lead_type = ClassInfo;
-                List<lead> result = db.leads.Where(x => (x.project_name.Contains(search) || search == null) && x.project_status_number == type &&
-                  (x.project_status_number != 6 && x.deleted == false) && (x.lead_date >= start && x.lead_date <= end2)).ToList();
+                var result = db.leads.Where(l => l.deleted == false
+                                      && l.lead_date >= start && l.lead_date <= end2
+                                      && (string.IsNullOrEmpty(Type) || l.project_status_number == statusNbr)
+                                      && (string.IsNullOrEmpty(search) || l.project_name.Contains(search))).ToList();
+
+
                 LeadController.lst = result;
                 return View(result.ToPagedList(page?? 1,8));
 
@@ -760,20 +773,23 @@ namespace ck_project.Controllers
             switch (by)
             {
                 case "pn": //project name
-                    nresult = LeadController.lst.OrderByDescending(a => a.project_name).ToList();
+                    nresult = LeadController.lst.OrderBy(a => a.project_name).ToList();
                     break;
                 case "cn"://customer name
-                    nresult = LeadController.lst.OrderByDescending(a => a.customer.customer_firstname).ToList();
+                    nresult = LeadController.lst.OrderBy(a => a.customer.customer_firstname).ToList();
+                    break;
+                case "ds"://Designer
+                    nresult = LeadController.lst.OrderBy(a => a.employee.emp_firstname).ToList();
                     break;
                 case "sp"://sales person
-                    nresult = LeadController.lst.OrderByDescending(a => a.employee.emp_firstname).ToList();
+                    nresult = LeadController.lst.OrderBy(a => a.lead_creator).ToList();
                     break;
                 case "pt"://project type
-                    nresult = LeadController.lst.OrderByDescending(a => a.project_type.project_type_name).ToList();
+                    nresult = LeadController.lst.OrderBy(a => a.project_type.project_type_name).ToList();
                     break;
-                case"ps"://project status
-                    nresult = LeadController.lst.OrderByDescending(a => a.project_status.project_status_name).ToList();
-                    break;
+                //case"ps"://project status
+                //    nresult = LeadController.lst.OrderBy(a => a.project_status.project_status_name).ToList();
+                //    break;
                 case "cd"://create date
                     nresult = LeadController.lst.OrderByDescending(a => a.lead_date).ToList();
                     break;
@@ -781,11 +797,20 @@ namespace ck_project.Controllers
                     nresult = LeadController.lst.OrderByDescending(a => a.Last_update_date).ToList();
                     break;
                 case "br"://branch
-                    nresult = LeadController.lst.OrderByDescending(a => a.branch.branch_name).ToList();
+                    nresult = LeadController.lst.OrderBy(a => a.branch.branch_name).ToList();
                     break;
 
             }
 
+            var ClassInfo = new List<SelectListItem>();
+            ClassInfo.AddRange(db.project_status.Where(CCVV => CCVV.project_status_name != "closed").Select(b => new SelectListItem
+
+            {
+                Text = b.project_status_name,
+                Selected = false,
+                Value = b.project_status_number.ToString()
+            }));
+            ViewBag.lead_type = ClassInfo;
 
             return View("ListLead",nresult.ToPagedList(page?? 1,8));
         }
