@@ -11,92 +11,93 @@
     }
 }
 
-        
-        <div class="container">
-            @using (Html.BeginForm("edit", "address", FormMethod.Post, new { id = ViewBag.id, mode = ViewBag.mode }))
+
+<div class="container">
+    @using (Html.BeginForm("edit", "address", FormMethod.Post, new { id = ViewBag.id, mode = ViewBag.mode }))
             {
-                @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
+        <div class="form-horizontal">
 
-                    <table>
-                        <tr style="background-color:lightgray">
-                            <td style="width:1150px"><h3>Edit Address</h3></td>
-                            <td style="width:50px">
-                                <div data-toggle="modal" data-target="#myModal"><i class="fa fa-question-circle-o" style="font-size:15px; color: blue;"></i> Help</div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div style="padding-bottom:10px"></div>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.address_number)
-                    @Html.Hidden("mode", (string)ViewBag.mode)
+            <table>
+                <tr style="background-color:lightgray">
+                    <td style="width:1150px"><h3>Edit Address</h3></td>
+                    <td style="width:50px">
+                        <div data-toggle="modal" data-target="#myModal"><i class="fa fa-question-circle-o" style="font-size:15px; color: blue;"></i> Help</div>
+                    </td>
+                </tr>
+            </table>
+            <div style="padding-bottom:10px"></div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.address_number)
+            @Html.Hidden("mode", (string)ViewBag.mode)
 
-                    <div class='col-xs-4 '>
-                        <div class="form-group">
-                            <label class='control-label'>Address</label>
-                            @Html.EditorFor(model => model.address1, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class='col-xs-4 '>
-                        <div class="form-group">
-                            <label class='control-label'>City</label>
-                            @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class='col-xs-4 '>
-                        <div class="form-group">
-                            <label class="control-label" for="name"> State</label>
-                            @Html.DropDownList("state", (IEnumerable<SelectListItem>)ViewBag.Sstate, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class='col-xs-4 '>
-                        <div class="form-group">
-                            <label class="control-label" for="name">County</label>
-                            @Html.EditorFor(model => model.county, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.county, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class='col-xs-4 '>
-                        <div class="form-group">
-                            <label class='control-label'>Zip code</label>
-                            @Html.EditorFor(model => model.zipcode, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.zipcode, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-0 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-
-
-
-
-                        </div>
-                    </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class='control-label'>Address</label>
+                    @Html.EditorFor(model => model.address1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.address1, "", new { @class = "text-danger" })
                 </div>
-            }
-           @{
-               string t = (string)ViewBag.mode;
-               if (t.Equals("l")) {
-                   @Html.ActionLink("edit another", "Edit", new { id = Model.address_number, mode = "ll" },new { @class = "btn btn-default", @style = "width: 240px" })
-               }
+            </div>
 
-            }
-            
-            <div>
-                <a href="javascript:history.go(-1)">Go Back</a>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class='control-label'>City</label>
+                    @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name"> State</label>
+                    @Html.DropDownList("state", (IEnumerable<SelectListItem>)ViewBag.Sstate, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name">County</label>
+                    @Html.EditorFor(model => model.county, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.county, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class='control-label'>Zip code</label>
+                    @Html.EditorFor(model => model.zipcode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.zipcode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-0 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+
+
+
+
+                </div>
             </div>
         </div>
+    }
+    @{
+        string t = (string)ViewBag.mode;
+        if (t.Equals("l"))
+        {
+            @Html.ActionLink("Edit Alternative Address", "Edit", new { id = Model.address_number, mode = "ll" }, new { @class = "btn btn-default", @style = "width: 240px" })
+        }
 
-    } 
+    }
+
+    <div>
+        <a href="javascript:history.go(-1)">Go Back</a>
+    </div>
+</div>
+
+    }
 
 
 @section Scripts {

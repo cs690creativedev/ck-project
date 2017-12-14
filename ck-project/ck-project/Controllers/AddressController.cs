@@ -13,12 +13,12 @@ namespace ck_project.Controllers
         ckdatabase db = new ckdatabase();
 
 
-        public ActionResult Edit(int id,string mode)
+        public ActionResult Edit(int id, string mode)
         {
             ViewBag.id = id;
             ViewBag.mode = mode;
-            
-            int ? lid = db.addresses.Where(t => t.address_number == id).First().lead_number;
+
+            int? lid = db.addresses.Where(t => t.address_number == id).First().lead_number;
             var Sstate = new List<SelectListItem> {
                new SelectListItem() {Text="Alabama", Value="AL"},
         new SelectListItem() { Text="Alaska", Value="AK"},
@@ -75,7 +75,8 @@ namespace ck_project.Controllers
             };
             ViewBag.Sstate = Sstate;
             //special for lead
-            if (mode == "ll") {
+            if (mode == "ll")
+            {
                 ViewBag.mode = "ll";
                 if (db.addresses.Any(e => e.lead_number == lid && e.address_type == "alternativeAddress"))
                 {
@@ -85,12 +86,13 @@ namespace ck_project.Controllers
                     Sstate.Where(v => v.Value == ll.state).First().Selected = true;
                     return View(ll);
                 }
-                else {
+                else
+                {
                     //new ll
                     return View(new address { address_number = -2 });
                 }
             }
-           //reguler address
+            //reguler address
             try
             {
                 address target = db.addresses.Where(t => t.address_number == id).First();
@@ -106,7 +108,7 @@ namespace ck_project.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(int id,string mode,FormCollection fo)
+        public ActionResult Edit(int id, string mode, FormCollection fo)
         {
             var Sstate = new List<SelectListItem> {
                new SelectListItem() {Text="Alabama", Value="AL"},
@@ -172,10 +174,10 @@ namespace ck_project.Controllers
                     lad.state = fo["state"];
                     lad.deleted = false;
                     TryUpdateModel(lad, new string[] { "address1", "city", "county", "zipcode" }, fo.ToValueProvider());
-                   //lad.address1 = fo["item.address1"];
-                   // lad.city = fo["item.city"];
-                   //lad.county = fo["item.county"];
-                   // lad.zipcode = fo["item.zipcode"];
+                    //lad.address1 = fo["item.address1"];
+                    // lad.city = fo["item.city"];
+                    //lad.county = fo["item.county"];
+                    // lad.zipcode = fo["item.zipcode"];
                     try
                     {
                         db.SaveChanges();
@@ -210,10 +212,10 @@ namespace ck_project.Controllers
                         n.address_type = "alternativeAddress";
                         n.state = fo["state"];
                         TryUpdateModel(n, new string[] { "address1", "city", "county", "zipcode" }, fo.ToValueProvider());
-                      //  n.address1 = fo["item.address1"];
-                      //  n.city = fo["item.city"];
-                      //n.county = fo["item.county"];
-                      // n.zipcode = fo["item.zipcode"];
+                        //  n.address1 = fo["item.address1"];
+                        //  n.city = fo["item.city"];
+                        //n.county = fo["item.county"];
+                        // n.zipcode = fo["item.zipcode"];
                         n.lead_number = lid;
                         try
                         {
@@ -223,15 +225,16 @@ namespace ck_project.Controllers
                         catch (Exception e) { ViewBag.m = e.Message; }
 
                     }
-                    else {
+                    else
+                    {
                         //update second
                         int aid = int.Parse(fo["address_number"]);
                         address q = db.addresses.Where(c => c.address_number == aid).First();
                         TryUpdateModel(q, new string[] { "address1", "city", "county", "zipcode" }, fo.ToValueProvider());
-                       // q.address1 = fo["item.address1"];
-                       //q.city = fo["item.city"];
-                       //q.county = fo["item.county"];
-                       //q.zipcode = fo["item.zipcode"];
+                        // q.address1 = fo["item.address1"];
+                        //q.city = fo["item.city"];
+                        //q.county = fo["item.county"];
+                        //q.zipcode = fo["item.zipcode"];
                         q.address_type = "alternativeAddress";
                         q.state = fo["state"];
                         try
@@ -250,27 +253,25 @@ namespace ck_project.Controllers
                     target.state = fo["state"];
                     target.address_type = "BranchAddress";
                     TryUpdateModel(target, new string[] { "address1", "city", "county", "zipcode" }, fo.ToValueProvider());
-                   // target.address1 = fo["item.address1"];
-                   //target.city = fo["item.city"];
-                   // target.county = fo["item.county"];
-                   // target.zipcode = fo["item.zipcode"];
-                    try {
+                    // target.address1 = fo["item.address1"];
+                    //target.city = fo["item.city"];
+                    // target.county = fo["item.county"];
+                    // target.zipcode = fo["item.zipcode"];
+                    try
+                    {
                         db.SaveChanges();
-                    } catch (Exception e) { ViewBag.m = e.Message; }
+                    }
+                    catch (Exception e) { ViewBag.m = e.Message; }
                     break;
 
 
             }
 
-                ViewBag.m = " The address was successfully updated on " + System.DateTime.Now;
-                return RedirectToAction("Edit", new { id = id,mode=mode });
-            }
-
-          
-
+            ViewBag.m = " The address was successfully updated on " + System.DateTime.Now;
+            return RedirectToAction("Edit", new { id = id, mode = mode });
         }
+
+
+
     }
-
-
-
-
+}
