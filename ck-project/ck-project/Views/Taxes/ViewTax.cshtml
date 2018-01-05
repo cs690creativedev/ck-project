@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ck_project.tax>
+
+@{
+    ViewBag.Title = "Tax";
+}
+<style>
+ th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+</style>
+
+
+<h2>Tax</h2>
+
+<body>
+    <table>
+                @if (ViewBag.TaxList != null)
+                {
+                    <tr>
+
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>County</th>
+                        <th>ZipCode </th>
+                        <th>StartDate</th>
+                        <th> EndDate</th>
+                    </tr>
+                    foreach (tax a in ViewBag.TaxList)
+                    {
+
+                <tr>
+                    <td>@a.tax_anme</td>
+                    <td>@a.tax_value</td>
+                    <td>@a.city</td>
+                    <td>@a.state</td>
+                    <td>@a.county</td>
+                    <td>@a.zipcode</td>
+                    <td>@a.start_date</td>
+                    <td>@a.end_date</td>
+
+                </tr>
+            }
+            <tr>
+                <td> <a href="/Taxes/AddTax">Add New</a></td>
+            </tr>      }
+    </table>
+</body>
+
+
